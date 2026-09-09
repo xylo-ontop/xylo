@@ -1,115 +1,874 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  
+    
+</head>
+<body>
+  
+<meta charset="UTF-8">
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Kenziee 💜</title>
+    <title>XYLO</title>
+
+    <link rel="icon" type="https://storage.filebin.net/filebin/a38e1d958c94446dd29df25ce91d434527e8f47211f48ec0404f9a7ed7867283?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GK352fd2505074fc9dde7fd2cb%2F20260909%2Fhel1-dc4%2Fs3%2Faws4_request&X-Amz-Date=20260909T133530Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&response-cache-control=max-age%3D900&response-content-disposition=inline%3B%20filename%3D%22file_00000000cbe08207a121680ee2673930.webp%22&response-content-type=image%2Fwebp&x-id=GetObject&X-Amz-Signature=0666623a29f5926f3906b180efc6fbe8bc75c65009b95de7aefc098e1fc618da">
+    <link rel="shortcut icon" href="https://storage.filebin.net/filebin/a38e1d958c94446dd29df25ce91d434527e8f47211f48ec0404f9a7ed7867283?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GK352fd2505074fc9dde7fd2cb%2F20260909%2Fhel1-dc4%2Fs3%2Faws4_request&X-Amz-Date=20260909T133530Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&response-cache-control=max-age%3D900&response-content-disposition=inline%3B%20filename%3D%22file_00000000cbe08207a121680ee2673930.webp%22&response-content-type=image%2Fwebp&x-id=GetObject&X-Amz-Signature=0666623a29f5926f3906b180efc6fbe8bc75c65009b95de7aefc098e1fc618da">
+    <link rel="apple-touch-icon" href="https://file.garden/aTzT5J7_xC8SSTd2/_typographydesign__letteringart__digitallettering__font__typeface__letters__typedesign___creativelettering__graphicdesigninspiration__designinspo__vector__vectorart-removebg-preview.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=Share+Tech+Mono&amp;family=Montserrat:wght@400;600;700;900&amp;display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #ffffff;
+            --accent-color: #ff6a00;
+            --muted-text: #777777;
+            --card-bg: #0a0a0a;
+            --smooth-trans: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            user-select: none;
+        }
+
+        .bg-watermark {
+            position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 15vw; font-weight: 900;
+            color: rgba(255, 255, 255, 0.02);
+            white-space: nowrap; z-index: -1; pointer-events: none;
+            letter-spacing: -5px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+            background-size: 8px 8px;
+            -webkit-background-clip: text;
+        }
+
+        pre.ascii-art {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px; line-height: 1.1; color: #eeeeee;
+            text-align: center; margin: 0 auto 30px auto;
+            white-space: pre; text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+        }
+
+        .glitch-char { opacity: 0; }
+        .glitch-pop { animation: flicker 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        @keyframes flicker {
+            0% { opacity: 0; color: #fff; text-shadow: 0 0 10px #fff; }
+            50% { opacity: 0.5; color: #555; text-shadow: none; }
+            100% { opacity: 1; color: #eee; text-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
+        }
+
+        #intro-screen {
+            position: fixed; inset: 0;
+            background-color: var(--bg-color);
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            z-index: 100;
+            transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .phase {
+            position: absolute;
+            display: flex; flex-direction: column; align-items: center;
+            opacity: 0;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .phase.active { opacity: 1; }
+
+        .pixel-font { font-family: 'Press Start 2P', cursive; }
+        .intro-text-wrapper { display: flex; align-items: flex-start; margin-bottom: 5px; }
+        .intro-title { font-size: 18px; letter-spacing: 2px; color: #fff; }
+        .intro-os { color: var(--accent-color); font-size: 8px; margin-left: 5px; margin-top: -2px; }
+        .pixel-dashes { color: #888; font-size: 10px; letter-spacing: 8px; margin-bottom: 5px; display: flex; gap: 8px;}
+        .pixel-dash { width: 15px; height: 4px; background-color: #555; }
+
+        .loading-container {
+            width: 220px;
+            overflow: hidden;
+            max-height: 20px;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        margin 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .loading-container.hide {
+            opacity: 0;
+            transform: scale(0.9);
+            max-height: 0;
             margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #e8d9ff, #c9a7ff);
-            font-family: "Poppins", sans-serif;
+            pointer-events: none;
         }
+        .loading-bar-bg { width: 100%; height: 2px; background-color: #222; position: relative; }
+        .loading-bar-fill { width: 0%; height: 100%; background-color: var(--accent-color); transition: width 2s linear; }
 
-        .letter {
-            width: 85%;
-            max-width: 600px;
-            padding: 40px;
-            background: #faf7ff;
-            border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(110, 60, 180, 0.25);
+        #click-prompt {
+            margin-top: 18px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 6px;
+            letter-spacing: 2px;
+            color: #888;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
             text-align: center;
-            border: 2px solid #b88cff;
+            animation: softFade 2.2s ease-in-out infinite;
+        }
+        #click-prompt.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+        @keyframes softFade {
+            0%, 100% { opacity: 0.55; }
+            50% { opacity: 1; }
         }
 
-        .heart {
-            font-size: 55px;
-            animation: heartbeat 1.5s infinite;
+        #intro-screen.click-ready { cursor: pointer; }
+
+        #main-screen {
+            opacity: 0; pointer-events: none;
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh; padding: 40px;
+            transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
         }
 
-        h1 {
-            color: #7b2cbf;
-            margin-bottom: 20px;
+        #main-screen.visible { opacity: 1; pointer-events: auto; }
+
+        nav { display: flex; gap: 50px; margin-bottom: 40px; z-index: 10; }
+        .nav-item {
+            color: var(--muted-text); font-size: 11px; font-weight: 700;
+            letter-spacing: 3px; cursor: pointer; text-transform: uppercase;
+            padding-bottom: 8px; position: relative; transition: var(--smooth-trans);
+        }
+        .nav-item::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 0%; height: 2px; background-color: var(--text-color); transition: var(--smooth-trans);
+        }
+        .nav-item:hover, .nav-item.active { color: var(--text-color); }
+        .nav-item.active::after { width: 100%; }
+
+        .tab-content {
+            display: none; flex-direction: column; align-items: center;
+            width: 100%; opacity: 0; transform: translateY(20px);
+            animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .tab-content.active { display: flex; }
+
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+        .section-header {
+            font-size: 20px; font-weight: 900; letter-spacing: 15px; margin-bottom: 60px; text-transform: uppercase; color: #fff;
         }
 
-        p {
-            color: #4b2c5e;
-            font-size: 17px;
-            line-height: 1.8;
-            text-align: left;
+        #about-tab {
+            max-width: 800px; background: rgba(10, 10, 10, 0.7);
+            border: 1px solid #222; border-radius: 15px; padding: 50px;
+            backdrop-filter: blur(10px); box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        #about-tab p { color: #aaa; font-size: 13px; line-height: 2; margin-bottom: 20px; text-align: justify; }
+        #about-tab strong { color: #fff; font-weight: 600; }
+
+        .members-flex {
+            display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;
+            max-width: 600px;
         }
 
-        .signature {
-            text-align: right;
-            margin-top: 30px;
-            color: #7b2cbf;
-            font-weight: bold;
-            font-size: 18px;
+        .member-container {
+            display: flex; flex-direction: column; align-items: center; gap: 15px;
+            cursor: pointer; position: relative; transition: var(--smooth-trans);
+        }
+        .member-container:hover { transform: translateY(-5px); }
+        .avatar {
+            width: 90px; height: 90px; border-radius: 50%; border: 2px solid #222;
+            object-fit: cover; filter: grayscale(100%) brightness(0.8);
+            transition: var(--smooth-trans);
+        }
+        .status-dot {
+            width: 14px; height: 14px; background-color: #80848E; border-radius: 50%;
+            position: absolute; bottom: 4px; right: 4px; border: 3px solid var(--bg-color);
+            transition: var(--smooth-trans);
+        }
+        .member-container:hover .avatar {
+            filter: grayscale(0%) brightness(1.1); transform: scale(1.1);
+            border-color: #555; box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        .member-container:hover .status-dot { transform: scale(1.1) translate(2px, 2px); }
+        .member-name {
+            font-size: 10px; font-weight: 900; letter-spacing: 2px;
+            background: #fff; color: #000; padding: 5px 12px; border-radius: 4px;
+            text-transform: uppercase; transition: var(--smooth-trans);
         }
 
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.2);
-            }
+        .affiliates-grid { display: flex; gap: 30px; justify-content: center; width: 100%; max-width: 1000px; }
+        .affiliate-card {
+            width: 280px; height: 320px; background-color: #080808; border: 1px solid #1a1a1a;
+            position: relative; cursor: pointer; display: flex; justify-content: center; align-items: center;
+            overflow: hidden; transition: var(--smooth-trans);
         }
+        .corner {
+            position: absolute; color: #444; font-family: 'Share Tech Mono', monospace;
+            font-size: 12px; pointer-events: none; transition: color 0.3s;
+        }
+        .affiliate-card:hover .corner { color: #888; }
+        .corner.tl { top: 5px; left: 8px; } .corner.tr { top: 5px; right: 8px; }
+        .corner.bl { bottom: 5px; left: 8px; } .corner.br { bottom: 5px; right: 8px; }
+        .aff-cursor { width: 40px; opacity: 0.5; transition: var(--smooth-trans); fill: #fff; }
+        .aff-hover-content {
+            position: absolute; inset: 0; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; padding: 20px; opacity: 0;
+            transition: var(--smooth-trans); z-index: 2;
+        }
+        .aff-logo {
+            width: 150px; height: auto; margin-bottom: 35px; transform: scale(0.8);
+            transition: var(--smooth-trans); filter: drop-shadow(0 0 10px rgba(12, 12, 12, 0.3));
+        }
+        .aff-desc {
+            font-size: 12px; text-align: center; line-height: 1.6; color: #ffffff;
+            transform: translateY(10px); transition: var(--smooth-trans);
+        }
+        .glitch-bg {
+            position: absolute; inset: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+            background-size: 4px 4px; opacity: 0; z-index: 1; transition: var(--smooth-trans);
+        }
+        .affiliate-card:hover { border-color: #333; box-shadow: 0 0 30px rgba(255, 255, 255, 0.05); }
+        .affiliate-card:hover .aff-cursor { opacity: 0; transform: scale(0.5); }
+        .affiliate-card:hover .glitch-bg { opacity: 1; }
+        .affiliate-card:hover .aff-hover-content { opacity: 1; }
+        .affiliate-card:hover .aff-logo { transform: scale(1); }
+        .affiliate-card:hover .aff-desc { transform: translateY(0); }
+
+        #music-player {
+            width: 500px; background: #121212; border: 1px solid #222;
+            border-radius: 12px; padding: 15px 20px; display: flex; align-items: center;
+            gap: 20px; margin-top: 80px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            transition: var(--smooth-trans);
+        }
+        .track-img { width: 60px; height: 60px; border-radius: 6px; object-fit: cover; transition: var(--smooth-trans); }
+        #music-player:hover .track-img { transform: scale(1.05); }
+        .player-info { display: flex; flex-direction: column; justify-content: center; flex-grow: 1; gap: 10px; }
+        .track-text-btn-row { display: flex; justify-content: space-between; align-items: center; }
+        .track-details { display: flex; flex-direction: column; }
+        .track-title { font-size: 14px; font-weight: 700; color: #fff; transition: var(--smooth-trans); }
+        .track-artist { font-size: 11px; color: #888; transition: var(--smooth-trans); }
+        .controls { display: flex; align-items: center; gap: 15px; }
+        .ctrl-icon { width: 14px; fill: #888; cursor: pointer; transition: all 0.2s ease; }
+        .ctrl-icon:hover { fill: #fff; transform: scale(1.1); }
+        .play-btn {
+            width: 35px; height: 35px; background: #fff; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; cursor: pointer;
+            transition: all 0.3s ease; border: none;
+        }
+        .play-btn:hover { transform: scale(1.05); box-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .play-btn:active { transform: scale(0.95); }
+        .play-btn svg { width: 14px; fill: #000; }
+        .progress-row { display: flex; align-items: center; gap: 10px; font-family: 'Share Tech Mono', monospace; font-size: 10px; color: #888; }
+        .progress-bg { flex-grow: 1; height: 4px; background: #333; border-radius: 2px; position: relative; cursor: pointer; transition: var(--smooth-trans); }
+        .progress-bg:hover { background: #444; }
+        .progress-fill { width: 0%; height: 100%; background: #fff; border-radius: 2px; transition: width 0.1s linear; }
+
+        #hover-card {
+            position: fixed; background: rgba(12, 12, 12, 0.85); backdrop-filter: blur(15px);
+            border: 1px solid #222; border-radius: 16px; width: 320px; padding: 20px;
+            display: flex; flex-direction: column; gap: 15px; opacity: 0; pointer-events: none;
+            transform: translateY(15px) scale(0.95);
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 50; box-shadow: 0 15px 40px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(255,255,255,0.05);
+        }
+        #hover-card.visible { opacity: 1; transform: translateY(0) scale(1); }
+        .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding-bottom: 12px; }
+        .card-title { font-size: 18px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+        .card-body {
+            display: flex; align-items: center; gap: 15px;
+            padding: 20px; border-radius: 8px; min-height: 100px; position: relative;
+            overflow: hidden; transition: var(--smooth-trans);
+            background-size: cover; background-position: center;
+        }
+        .card-avatar { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 1px solid #333; transition: var(--smooth-trans); }
+        .card-info { display: flex; flex-direction: column; gap: 4px; z-index: 1; }
+        .card-username { font-size: 11px; color: #999; font-family: 'Share Tech Mono', monospace; }
+        .card-id { font-size: 10px; color: #aaa; font-family: 'Share Tech Mono', monospace; }
+        .card-activity {
+            font-size: 10px; color: #4fc3f7;
+            font-family: 'Share Tech Mono', monospace;
+            margin-top: 4px; font-style: italic;
+        }
+        .card-banner-url { font-size: 8px; color: #777; font-family: 'Share Tech Mono', monospace; word-break: break-all; }
+        .view-profile-btn {
+            background: transparent; color: #fff; border: 1px solid #333; padding: 12px;
+            text-align: center; font-size: 10px; letter-spacing: 2px; border-radius: 8px;
+            text-transform: uppercase; font-weight: 700; transition: var(--smooth-trans);
+            cursor: pointer;
+        }
+        .view-profile-btn:hover { background: rgba(255,255,255,0.1); border-color: #555; }
+
+        .streaming-indicator {
+            position: absolute; top: -5px; right: -5px;
+            background: #9147ff; color: white; font-size: 8px;
+            padding: 2px 4px; border-radius: 3px; font-weight: bold;
+            font-family: 'Share Tech Mono', monospace; z-index: 2;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .member-container:hover .streaming-indicator { opacity: 1; }
     </style>
-</head>
 
-<body>
 
-    <div class="letter">
 
-        <div class="heart">💜</div>
+    <audio id="bg-music" src="https://storage.filebin.net/filebin/016c3152437003588b881b75afa08a324d37aaf8aacebacb4569d4305e8a5de9?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GK352fd2505074fc9dde7fd2cb%2F20260909%2Fhel1-dc4%2Fs3%2Faws4_request&X-Amz-Date=20260909T110843Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&response-cache-control=max-age%3D900&response-content-disposition=inline%3B%20filename%3D%22Zae%2C%20Hev%20Abi%20-%20SUBOMOTO%20REMIX%20%28Lyrics%29.mp3%22&response-content-type=video%2Fmp4&x-id=GetObject&X-Amz-Signature=5b63106051eed7df09e0ccd95aaa9bb440782c6542a0ea4ae36c1e46bca3ef3b" preload="metadata" loop=""></audio>
 
-        <h1>To Kenziee</h1>
+    <div id="intro-screen" class="click-ready">
 
-        <p>
-            Hi Kenziee 💜
-        </p>
-
-        <p>
-            I just wanna promise you that I’ll never do to you what your ex
-            did. I would never want to hurt you or make you feel the same pain
-            you experienced before. I know that trust isn't something that can
-            be built overnight, and I completely understand that.
-        </p>
-
-        <p>
-            I respect your decisions, your boundaries, and whatever pace you're
-            comfortable with. I’m not here to rush you or force you to feel
-            something for me. I just want to be someone you can feel safe and
-            comfortable around.
-        </p>
-
-        <p>
-            I hope that as time goes by, we can get to know each other more
-            deeply, understand each other better, and slowly build genuine
-            trust. I want to show you through my actions, not just my words,
-            that my intentions toward you are sincere. 💜
-        </p>
-
-        <p>
-            I’m really hoping that we can continue getting to know each other
-            and create something genuine. I’ll be patient, and I’ll respect
-            whatever you decide. I just want you to know that I’m here, and
-            I’m willing to take things slowly and let everything happen
-            naturally. 💜
-        </p>
-
-        <div class="signature">
-            — Someone who genuinely cares about you 💜
+        <div id="phase1" class="phase active pixel-font">
+            <div class="intro-text-wrapper">
+                <div class="intro-title">XYLO</div>
+                <div class="intro-os">ON TOP!</div>
+            </div>
+            <div class="pixel-dashes">
+                <div class="pixel-dash"></div>
+                <div class="pixel-dash"></div>
+                <div class="pixel-dash"></div>
+            </div>
+            <div id="click-prompt" class="show">[ C L I C K T O E N T E R ]</div>
         </div>
 
+        <div id="phase2" class="phase">
+<pre id="intro-ascii" class="ascii-art">                                                                                                                      
+                                        
+                                        
+                                        
+ ##    ## ###    ### ##         .####.  
+ :##  ##: .##:  :##. ##         ######  
+  ##  ##   ###  ###  ##        :##  ##: 
+  :####:    ##::##   ##        ##:  :## 
+   ####      ####    ##        ##    ## 
+   :##:      ####    ##        ##    ## 
+   :##:      :##:    ##        ##    ## 
+   ####       ##     ##        ##    ## 
+  :####:      ##     ##        ##:  :## 
+  ##::##      ##     ##        :##  ##: 
+ :##  ##:     ##     ########   ######  
+ ##    ##     ##     ########   .####.  
+                                        
+                                        
+                                        
+                                        
+            <div class="loading-container" id="p2-loader-container" style="width: 400px;">
+                <div class="loading-bar-bg" style="height: 3px; background-color: #333;">
+                    <div class="loading-bar-fill" id="bar2" style="background-color: #fff; transition: width 2.5s linear;"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
-</body>
-</html>
+    <div id="main-screen">
+        <div class="bg-watermark">XYLO</div>
+
+        <nav>
+            <div class="nav-item active" onclick="switchTab(event, 'members')">MEMBERS</div>
+            <div class="nav-item" onclick="switchTab(event, 'about')">ABOUT US</div>
+            <div class="nav-item" onclick="switchTab(event, 'affiliates')">AFFILIATES</div>
+        </nav>
+
+        <div id="members-tab" class="tab-content active">
+            <div class="section-header">X Y L O O N Y O U R F A C E</div>
+
+            <div class="members-flex">
+                <div class="member-container" data-discord-id="1513507578011848756">
+                    <div style="position: relative;">
+                        <img src="https://cdn.discordapp.com/embed/avatars/4.png" class="avatar">
+                        <div class="status-dot"></div>
+                        <div class="streaming-indicator">LIVE</div>
+                    </div>
+                    <div class="member-name">Loading...</div>
+                </div>
+                <div class="member-container" data-discord-id="1455588549079466212">
+                    <div style="position: relative;">
+                        <img src="https://cdn.discordapp.com/embed/avatars/4.png" class="avatar">
+                        <div class="status-dot"></div>
+                        <div class="streaming-indicator">LIVE</div>
+                    </div>
+                    <div class="member-name">Loading...</div>
+                </div>
+                <div class="member-container" data-discord-id="">
+                    <div style="position: relative;">
+                        <img src="https://cdn.discordapp.com/embed/avatars/0.png" class="avatar">
+                        <div class="status-dot"></div>
+                        <div class="streaming-indicator">LIVE</div>
+                    </div>
+                    <div class="member-name">Loading...</div>
+                </div>
+                <div class="member-container" data-discord-id="1508672722417483909">
+                    <div style="position: relative;">
+                        <img src="https://cdn.discordapp.com/embed/avatars/0.png" class="avatar">
+                        <div class="status-dot"></div>
+                        <div class="streaming-indicator">LIVE</div>
+                    </div>
+                    <div class="member-name">Loading...</div>
+                </div>
+                <div class="member-container" data-discord-id="1492765197981450373">
+                    <div style="position: relative;">
+                        <img src="https://cdn.discordapp.com/embed/avatars/3.png" class="avatar">
+                        <div class="status-dot"></div>
+                        <div class="streaming-indicator">LIVE</div>
+                    </div>
+                    <div class="member-name">Loading...</div>
+                </div>
+                <div class="member-container" data-discord-id="1435594923461181490">
+                    <div style="position: relative;">
+                        <img src="https://cdn.discordapp.com/embed/avatars/4.png" class="avatar">
+                        <div class="status-dot"></div>
+                        <div class="streaming-indicator">LIVE</div>
+                    </div>
+                    <div class="member-name">Loading...</div>
+                </div>
+                <div class="member-container" data-discord-id="1544690592154648596">
+                    <div style="position: relative;">
+                        <img src="https://cdn.discordapp.com/embed/avatars/0.png" class="avatar">
+                        <div class="status-dot"></div>
+                        <div class="streaming-indicator">LIVE</div>
+                    </div>
+                    <div class="member-name">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="about-tab" class="tab-content">
+<pre id="about-ascii" class="ascii-art" style="margin-bottom: 40px; transform: scale(1.1);"> 
+                                                         
+ #:  :##:   :# #        ##  
+ .#  #..#   #. #      :#  #:
+   ::   :# #:  #      #.  .#
+   ##    # #   #      #    #
+   ##    :#:   #      #    #
+  :##.    #    #      #    #
+  #::#    #    #      #.  .#
+ :#  #.   #    #      :#  #:
+ #:  :#   #    ######   ##  
+                            
+</pre>
+            <p>The <strong>RichBoyz</strong> </p>
+            <p>By early <strong>2021</strong>, </p>
+            <p>That was the day the name became what it is now, <strong>RichBoyz</strong>. I</p>
+        </div>
+
+        <div id="affiliates-tab" class="tab-content">
+            <div class="section-header" style="letter-spacing: 5px; font-family: 'Share Tech Mono';">[ affiliations ]</div>
+
+            <div class="affiliates-grid">
+                <div class="affiliate-card">
+                    <div class="corner tl">+</div><div class="corner tr">+</div>
+                    <div class="corner bl">+</div><div class="corner br">+</div>
+                    <svg class="aff-cursor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 2l12 11.2-5.8.5 3.3 7.3-2.2 1-3.2-7.4-4.4 4.7z"></path></svg>
+                    <div class="glitch-bg"></div>
+                    <div class="aff-hover-content">
+                        <img src="https://file.garden/aTzT5J7_xC8SSTd2/image-removebg-preview.png" class="aff-logo" alt="Logo">
+                        <div class="aff-desc">trapgng. mga adik, mayaman pa sa mayaman source ng mga drugs</div>
+                    </div>
+                </div>
+                <div class="affiliate-card">
+                    <div class="corner tl">+</div><div class="corner tr">+</div>
+                    <div class="corner bl">+</div><div class="corner br">+</div>
+                    <svg class="aff-cursor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 2l12 11.2-5.8.5 3.3 7.3-2.2 1-3.2-7.4-4.4 4.7z"></path></svg>
+                    <div class="glitch-bg"></div>
+                    <div class="aff-hover-content">
+                        <img src="https://file.garden/aTzT5J7_xC8SSTd2/622a705097a632c8b3155750ca9c18d0.png" class="aff-logo" alt="Logo">
+                        <div class="aff-desc">cryvex. mababait na tao soft server</div>
+                    </div>
+                </div>
+                <div class="affiliate-card">
+                    <div class="corner tl">+</div><div class="corner tr">+</div>
+                    <div class="corner bl">+</div><div class="corner br">+</div>
+                    <svg class="aff-cursor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 2l12 11.2-5.8.5 3.3 7.3-2.2 1-3.2-7.4-4.4 4.7z"></path></svg>
+                    <div class="glitch-bg"></div>
+                    <div class="aff-hover-content">
+                        <img src="https://file.garden/aTzT5J7_xC8SSTd2/Pink-Kitty-PNG-Photos.png" class="aff-logo" alt="Logo">
+                        <div class="aff-desc">Security ni ulan</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="music-player">
+            <img src="https://file.garden/aTzT5J7_xC8SSTd2/ab67616100005174eef39c13833db73e54f2192e" class="track-img">
+
+            <div class="player-info">
+                <div class="track-text-btn-row">
+                    <div class="track-details">
+                        <div class="track-title">SAYHELLO2MAHGLOCK</div>
+                        <div class="track-artist">@HELLMERRY</div>
+                    </div>
+
+                    <div class="controls">
+                        <svg class="ctrl-icon" viewBox="0 0 24 24" onclick="skipTrack(-1)"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg>
+
+                        <button class="play-btn" onclick="togglePlay()">
+                            <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                            <svg id="icon-pause" style="display:none;" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+                        </button>
+
+                        <svg class="ctrl-icon" viewBox="0 0 24 24" onclick="skipTrack(1)"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"></path></svg>
+                    </div>
+                </div>
+
+                <div class="progress-row">
+                    <span id="time-current">0:00</span>
+                    <div class="progress-bg" id="progress-bg" onclick="seek(event)">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <span id="time-total">3:45</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="hover-card">
+        <div class="card-header">
+            <div class="card-title" id="hc-name">NAME</div>
+            <div style="font-size: 24px; font-weight: 900; color: #fff; font-style: italic; opacity: 0.3;">XYL</div>
+        </div>
+        <div class="card-body">
+            <img src="" id="hc-img" class="card-avatar">
+            <div class="card-info">
+                <div class="card-username" id="hc-user">@username</div>
+                <div class="card-id" id="hc-id">ID: </div>
+                <div class="card-activity" id="hc-activity"></div>
+                <div class="card-banner-url" id="hc-banner-url"></div>
+            </div>
+        </div>
+        <div class="view-profile-btn">VIEW PROFILE</div>
+    </div>
+
+    
+
+
+
+
+    <script>
+        async function fetchLanyardData(userId) {
+            try {
+                const response = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+                if (!response.ok) return null;
+                return await response.json();
+            } catch (error) {
+                console.error(`Lanyard API error for ${userId}:`, error);
+                return null;
+            }
+        }
+
+        function getStatusColor(status) {
+            const colors = {
+                'online': '#23a559', 'idle': '#F0B232', 'dnd': '#F23F42',
+                'invisible': '#80848E', 'offline': '#80848E'
+            };
+            return colors[status?.toLowerCase()] || '#80848E';
+        }
+
+        function getActivityText(activities) {
+            if (!activities || activities.length === 0) return "No activity";
+            const activity = activities.find(a => a.type !== 4) || activities[0];
+            const type = activity.type;
+            const name = activity.name || 'Unknown';
+            const state = activity.state;
+            const details = activity.details;
+            const emoji = activity.emoji?.name ? activity.emoji.name : '';
+
+            const typeMap = {
+                0: 'Playing', 1: 'Streaming', 2: 'Listening to',
+                3: 'Watching', 4: 'Custom Status', 5: 'Competing in'
+            };
+
+            let text = `${typeMap[type] || 'Doing'}`;
+            if (state) text += `: ${emoji} ${state}`;
+            else if (details) text += `: ${emoji} ${details}`;
+            else if (name) text += `: ${emoji} ${name}`;
+            return text;
+        }
+
+        function getDefaultAvatarUrl(userId, discriminator) {
+            let index = 0;
+            if (discriminator && discriminator !== '0' && discriminator !== '0000') {
+                index = parseInt(discriminator) % 5;
+            } else if (userId) {
+                try {
+                    index = Number((BigInt(userId) >> 22n) % 6n);
+                } catch (e) {
+                    index = 0;
+                }
+            }
+            return `https://cdn.discordapp.com/embed/avatars/${index}.png`;
+        }
+
+        function updateMemberFromLanyard(member, data) {
+            const avatarImg = member.querySelector('.avatar');
+            const nameEl = member.querySelector('.member-name');
+            const statusDot = member.querySelector('.status-dot');
+            const streamingIndicator = member.querySelector('.streaming-indicator');
+            const discordId = member.getAttribute('data-discord-id');
+
+            if (!data?.data) {
+                if (avatarImg && discordId) {
+                    avatarImg.src = getDefaultAvatarUrl(discordId);
+                }
+                return;
+            }
+            const lanyard = data.data;
+
+            const avatarUrl = lanyard.discord_user.avatar
+                ? `https://cdn.discordapp.com/avatars/${lanyard.discord_user.id}/${lanyard.discord_user.avatar}.png?size=256`
+                : getDefaultAvatarUrl(lanyard.discord_user.id, lanyard.discord_user.discriminator);
+            avatarImg.src = avatarUrl;
+
+            const displayName = lanyard.discord_user.global_name || lanyard.discord_user.username || 'Unknown';
+            nameEl.textContent = displayName.toUpperCase();
+
+            if (statusDot) {
+                const status = lanyard.discord_status || (lanyard.activities.length > 0 ? 'online' : 'offline');
+                statusDot.style.backgroundColor = getStatusColor(status);
+            }
+
+            if (streamingIndicator) {
+                const isStreaming = lanyard.activities.some(a => a.type === 1);
+                streamingIndicator.style.display = isStreaming ? 'block' : 'none';
+            }
+
+            member.lanyardData = lanyard;
+        }
+
+        async function loadAllMembers() {
+            const members = document.querySelectorAll('.member-container');
+            const promises = [];
+            members.forEach(member => {
+                const discordId = member.getAttribute('data-discord-id');
+                if (!discordId) return;
+
+                // Set initial default avatar immediately while loading
+                const avatarImg = member.querySelector('.avatar');
+                if (avatarImg && (!avatarImg.src || avatarImg.src.includes('tumblr_mes8da2Gy01qddhl8o1_500_gif'))) {
+                    avatarImg.src = getDefaultAvatarUrl(discordId);
+                }
+
+                promises.push(
+                    fetchLanyardData(discordId)
+                        .then(data => updateMemberFromLanyard(member, data))
+                        .catch(error => {
+                            console.error(`Failed to load member ${discordId}:`, error);
+                            updateMemberFromLanyard(member, null);
+                        })
+                );
+            });
+            await Promise.all(promises);
+        }
+
+        function showHoverCard(member) {
+            const lanyard = member.lanyardData;
+            if (!lanyard) return;
+            const hoverCard = document.getElementById('hover-card');
+            const cardBody = hoverCard.querySelector('.card-body');
+
+            document.getElementById('hc-name').textContent =
+                lanyard.discord_user.global_name || lanyard.discord_user.username || 'Unknown';
+            document.getElementById('hc-user').textContent = `@${lanyard.discord_user.username}`;
+            document.getElementById('hc-id').textContent = `ID: ${lanyard.discord_user.id}`;
+            document.getElementById('hc-activity').textContent = getActivityText(lanyard.activities);
+
+            const avatarUrl = lanyard.discord_user.avatar
+                ? `https://cdn.discordapp.com/avatars/${lanyard.discord_user.id}/${lanyard.discord_user.avatar}.png?size=256`
+                : getDefaultAvatarUrl(lanyard.discord_user.id, lanyard.discord_user.discriminator);
+            document.getElementById('hc-img').src = avatarUrl;
+
+            if (lanyard.discord_user.banner) {
+                const bannerUrl = `https://cdn.discordapp.com/banners/${lanyard.discord_user.id}/${lanyard.discord_user.banner}.png?size=4096`;
+                cardBody.style.backgroundImage = `url(${bannerUrl})`;
+                document.getElementById('hc-banner-url').textContent = `Banner: ${bannerUrl}`;
+            } else {
+                cardBody.style.backgroundImage = 'none';
+                document.getElementById('hc-banner-url').textContent = 'Banner: None';
+            }
+
+            const rect = member.getBoundingClientRect();
+            let topPos = rect.bottom + 20;
+            let leftPos = rect.left + (rect.width / 2) - 160;
+            if (leftPos < 10) leftPos = 10;
+            if (leftPos + 340 > window.innerWidth) leftPos = window.innerWidth - 340;
+            if (topPos + 220 > window.innerHeight) topPos = rect.top - 220;
+
+            hoverCard.style.top = `${topPos}px`;
+            hoverCard.style.left = `${leftPos}px`;
+            hoverCard.classList.add('visible');
+        }
+
+        let hasEntered = false;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const clickPrompt = document.getElementById('click-prompt');
+            const introScreen = document.getElementById('intro-screen');
+
+            loadAllMembers().then(() => setupMemberEvents());
+
+            setTimeout(() => {
+                clickPrompt.classList.add('show');
+                introScreen.classList.add('click-ready');
+                introScreen.addEventListener('click', enterSite, { once: true });
+            }, 900);
+        });
+
+        function enterSite() {
+            if (hasEntered) return;
+            hasEntered = true;
+
+            const phase1 = document.getElementById('phase1');
+            const phase2 = document.getElementById('phase2');
+            const bar2 = document.getElementById('bar2');
+            const introScreen = document.getElementById('intro-screen');
+            const mainScreen = document.getElementById('main-screen');
+
+            startMusic();
+
+            phase1.style.opacity = '0';
+            introScreen.classList.remove('click-ready');
+
+            setTimeout(() => {
+                phase1.classList.remove('active');
+
+                phase2.classList.add('active');
+                initGlitchText('intro-ascii');
+
+                setTimeout(() => { bar2.style.width = '100%'; }, 200);
+
+                setTimeout(() => {
+                    introScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        introScreen.style.display = 'none';
+                        mainScreen.classList.add('visible');
+                    }, 1500);
+                }, 3200);
+            }, 800);
+        }
+
+        function setupMemberEvents() {
+            const members = document.querySelectorAll('.member-container');
+            const hoverCard = document.getElementById('hover-card');
+            members.forEach(member => {
+                member.addEventListener('mouseenter', () => showHoverCard(member));
+                member.addEventListener('mouseleave', () => hoverCard.classList.remove('visible'));
+            });
+        }
+
+        const audio = document.getElementById('bg-music');
+        const playIcon = document.getElementById('icon-play');
+        const pauseIcon = document.getElementById('icon-pause');
+
+        function startMusic() {
+            audio.play().then(() => {
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            }).catch(e => console.log("Audio play failed:", e));
+        }
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().catch(e => console.log("Audio play failed:", e));
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            } else {
+                audio.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            }
+        }
+
+        function skipTrack(direction) {
+            audio.currentTime += direction * 10;
+        }
+
+        function seek(e) {
+            if (!audio.duration) return;
+            const rect = document.getElementById('progress-bg').getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = pos * audio.duration;
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds) || !isFinite(seconds)) return "0:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return mins + ":" + (secs < 10 ? "0" : "") + secs;
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            document.getElementById('time-total').textContent = formatTime(audio.duration);
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            document.getElementById('time-current').textContent = formatTime(audio.currentTime);
+            if (audio.duration) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                document.getElementById('progress-fill').style.width = `${percent}%`;
+            }
+        });
+
+        audio.addEventListener('ended', () => {
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            audio.currentTime = 0;
+            document.getElementById('progress-fill').style.width = '0%';
+            document.getElementById('time-current').textContent = '0:00';
+        });
+
+        audio.volume = 0.5;
+
+        function initGlitchText(elementId) {
+            const asciiEl = document.getElementById(elementId);
+            const originalText = asciiEl.textContent;
+            asciiEl.innerHTML = '';
+            const spans = [];
+
+            for (let i = 0; i < originalText.length; i++) {
+                if (originalText[i] === ' ' || originalText[i] === '\n') {
+                    asciiEl.appendChild(document.createTextNode(originalText[i]));
+                } else {
+                    const span = document.createElement('span');
+                    span.textContent = originalText[i];
+                    span.className = 'glitch-char';
+                    asciiEl.appendChild(span);
+                    spans.push(span);
+                }
+            }
+
+            spans.forEach(span => {
+                const randomDelay = Math.random() * 2000;
+                setTimeout(() => { span.classList.add('glitch-pop'); }, randomDelay);
+            });
+        }
+
+        function switchTab(e, tabName) {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+                void el.offsetWidth;
+            });
+
+            document.getElementById(tabName + '-tab').classList.add('active');
+
+            if (tabName === 'about') {
+                initGlitchText('about-ascii');
+            }
+        }
+    </script>
+</body></html>
